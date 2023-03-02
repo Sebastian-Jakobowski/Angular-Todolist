@@ -1,0 +1,8 @@
+<header class="header">
+    <h1>The Todo List</h1>
+    <mat-form-field [style.width.%]="100">
+        <mat-label>What do you want to achieve?</mat-label>
+        <input matInput class="new-todo" autoFocus 
+        [value]="text" (keyup)="changeText($event)" (keyup.enter)="addTodo()"/>
+    </mat-form-field>
+</header>

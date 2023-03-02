@@ -1,0 +1,13 @@
+<mat-list-item [ngClass]="{ editing: isEditingProps }" cdkDrag>
+    <div class="view">
+        <mat-checkbox style="color:darkgrey" matInput class="toggle" [checked]="todoProps.isCompleted"
+        (change)="toggleTodo()">
+        </mat-checkbox>
+        <label (dblclick)="setTodoInEditMode()">{{todoProps.text}}</label>
+        <button style="float:right;" mat-button (click)="removeTodo()"><mat-icon>cancel</mat-icon>
+        </button>
+    </div>
+    <ng-container *ngIf="isEditingProps">
+        <input matInput class="edit" #textInput [value]="editingText" (keyup)="changeText($event)" (keyup.enter)="changeTodo()"/>
+    </ng-container>
+</mat-list-item>

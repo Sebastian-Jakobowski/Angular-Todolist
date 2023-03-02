@@ -1,0 +1,17 @@
+<footer class="footer" [ngClass]="{hidden: noTodosClass$ | async}">
+    <span class="todo-count">
+        <strong>{{ activeCount$ | async }}</strong>
+        {{ itemsLeftText$ | async }}
+    </span>
+    <mat-button-toggle-group>
+        <mat-button-toggle value="All"(change)="changeFilter(filterEnum.all)">
+            {{filterEnum.all}}
+        </mat-button-toggle>
+        <mat-button-toggle value="Active"(change)="changeFilter(filterEnum.active)">
+            {{filterEnum.active}}
+        </mat-button-toggle>
+        <mat-button-toggle value="Completed" (change)="changeFilter(filterEnum.completed)">
+            {{filterEnum.completed}}
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+</footer>
