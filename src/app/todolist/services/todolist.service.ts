@@ -16,8 +16,7 @@ export class TodolistService {
             id: Math.random().toString(16),
         };
         const updatedTodos = [...this.todos$.getValue(), newTodo]
-        this.todos$.next(updatedTodos);
-        this.saveToLocalStorage();
+        this.saveAndUpdateTodos(updatedTodos);
     }
 
     addTodoFromStorage(todo: TodolistInterface): void {
@@ -32,7 +31,7 @@ export class TodolistService {
                 isCompleted
             };
         });
-        this.todos$.next(updatedTodos);
+        this.saveAndUpdateTodos(updatedTodos);
     }
 
     changeFilter(filterName: FilterEnum): void {
@@ -49,7 +48,7 @@ export class TodolistService {
             }
             return todo;
         });
-        this.todos$.next(updatedTodos);
+        this.saveAndUpdateTodos(updatedTodos);
     }
 
     removeTodo(id: string): void {
@@ -67,7 +66,7 @@ export class TodolistService {
             }
             return todo
         });
-        this.todos$.next(updatedTodos);
+        this.saveAndUpdateTodos(updatedTodos);
     }
 
     changeIndexPosition(event: CdkDragDrop<TodolistInterface[]>): void {
@@ -89,5 +88,10 @@ export class TodolistService {
         this.todos$.getValue().forEach((todo, index) => {
             localStorage.setItem(index.toString(), JSON.stringify(todo)); 
         });
+    }
+
+    private saveAndUpdateTodos(updatedTodos: TodolistInterface[]) {
+        this.todos$.next(updatedTodos);
+        this.saveToLocalStorage();
     }
     }
